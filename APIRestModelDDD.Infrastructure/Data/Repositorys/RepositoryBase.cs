@@ -1,4 +1,5 @@
 ﻿using APIRestModelDDD.Domain.Core.Interfaces.Repositorys;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,12 +41,28 @@ namespace APIRestModelDDD.Infrastructure.Data.Repositorys
 
         public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                contextoDB.Set<TEntity>().Remove(entity);
+                contextoDB.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                contextoDB.Entry(entity).State = EntityState.Modified;
+                contextoDB.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
