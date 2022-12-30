@@ -35,7 +35,7 @@ namespace APIRestModelDDD.Infrastructure.Data.Repositorys
 
         public TEntity GetById(int id)
         {
-            throw new NotImplementedException();
+            return contextoDB.Set<TEntity>().Find(id);
         }
 
         public void Remove(TEntity entity)
