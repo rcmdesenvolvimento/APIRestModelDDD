@@ -1,35 +1,42 @@
-﻿using APIRestModelDDD.Domain.Core.Interfaces.Services;
+﻿using APIRestModelDDD.Domain.Core.Interfaces.Repositorys;
+using APIRestModelDDD.Domain.Core.Interfaces.Services;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace APIRestModelDDD.Domain.Services
 {
     public class ServiceBase<TEntity> : IServiceBase<TEntity> where TEntity : class
     {
+        private readonly IRepositoryBase<TEntity> repositoryBase;
+
+        public ServiceBase(IRepositoryBase<TEntity> repositoryBase)
+        {
+            this.repositoryBase = repositoryBase;
+        }
+
         public void Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            repositoryBase.Add(entity);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return repositoryBase.GetAll();
         }
 
         public TEntity GetById(int id)
         {
-            throw new NotImplementedException();
+            return repositoryBase.GetById(id);
         }
 
         public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            repositoryBase.Remove(entity);  
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            repositoryBase.Update(entity);
         }
     }
 }
